@@ -56,7 +56,7 @@ export const authV2ServiceData = {
           expiresIn: "3600",
           createdAt: "2025-10-03T10:30:00Z"
         },
-        message: "User registered successfully",
+        message: "User registered successfully using auth v2",
         timestamp: "2025-10-03T10:30:00Z"
       },
       errorResponses: [
@@ -109,7 +109,7 @@ export const authV2ServiceData = {
           refreshToken: "AMf-vBzKhKMA...",
           expiresIn: "3600"
         },
-        message: "Login successful",
+        message: "Login successful using auth v2",
         timestamp: "2025-10-03T10:30:00Z"
       },
       errorResponses: [
@@ -149,7 +149,7 @@ export const authV2ServiceData = {
           refreshToken: "AMf-vBzKhKMA...",
           expiresIn: "3600"
         },
-        message: "Token refreshed successfully",
+        message: "Token refreshed successfully using auth v2",
         timestamp: "2025-10-03T10:30:00Z"
       },
       errorResponses: [
@@ -183,7 +183,7 @@ export const authV2ServiceData = {
       response: {
         success: true,
         data: null,
-        message: "Password reset email sent successfully",
+        message: "Password reset email sent successfully using auth v2",
         timestamp: "2025-10-03T10:30:00Z"
       },
       errorResponses: [
@@ -223,7 +223,7 @@ export const authV2ServiceData = {
       response: {
         success: true,
         data: null,
-        message: "Password reset successfully",
+        message: "Password reset successfully using auth v2",
         timestamp: "2025-10-03T10:30:00Z"
       },
       errorResponses: [
@@ -258,7 +258,7 @@ export const authV2ServiceData = {
       response: {
         success: true,
         data: null,
-        message: "Logout successful",
+        message: "Logout successful using auth v2",
         timestamp: "2025-10-03T10:30:00Z"
       },
       errorResponses: [
@@ -305,7 +305,7 @@ export const authV2ServiceData = {
           photoURL: "https://example.com/new-photo.jpg",
           updatedAt: "2025-10-03T10:30:00Z"
         },
-        message: "Profile updated successfully",
+        message: "Profile updated successfully using auth v2",
         timestamp: "2025-10-03T10:30:00Z"
       },
       errorResponses: [
@@ -341,7 +341,7 @@ export const authV2ServiceData = {
       response: {
         success: true,
         data: null,
-        message: "User deleted successfully",
+        message: "User deleted successfully using auth v2",
         timestamp: "2025-10-03T10:30:00Z"
       },
       errorResponses: [
@@ -370,7 +370,7 @@ export const authV2ServiceData = {
           service: "auth-service",
           version: "1.0.0"
         },
-        message: "Service is healthy",
+        message: "Service is healthy using auth v2",
         timestamp: "2025-10-03T10:30:00Z"
       },
       errorResponses: [],
