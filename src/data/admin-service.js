@@ -2,7 +2,7 @@ export const adminServiceData = {
   name: "Admin Service",
   description: "Comprehensive admin orchestrator service for ATMA. Provides centralized admin management by proxying requests to auth-service and archive-service. Features include admin authentication, user management, token operations, system monitoring, analytics, job management, performance optimization, and security auditing. All 4 development phases completed with 18 production-ready endpoints.",
   baseUrl: "api.futureguide.id",
-  version: "2.0.0",
+  version: "1.0.0",
   port: "3007",
   endpoints: [
     {
@@ -13,15 +13,15 @@ export const adminServiceData = {
   authentication: null,
   rateLimit: "Admin Limiter (1000/15min)",
       requestBody: {
-        username: "admin",
+        email: "admin@futureguide.id",
         password: "AdminPassword123"
       },
       parameters: [
         {
-          name: "username",
+          name: "identifier",
           type: "string",
           required: true,
-          description: "Admin username or email"
+          description: "Admin username OR email (send only one of them)"
         },
         {
           name: "password",
@@ -32,6 +32,7 @@ export const adminServiceData = {
       ],
       response: {
         success: true,
+        message: "Login successful",
         data: {
           user: {
             id: "550e8400-e29b-41d4-a716-446655440000",
@@ -44,8 +45,7 @@ export const adminServiceData = {
               full_name: "System Administrator"
             }
           },
-          token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-          message: "Login successful"
+          token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
         }
       },
       errorResponses: [
@@ -55,7 +55,7 @@ export const adminServiceData = {
       example: `curl -X POST https://api.futureguide.id/api/admin/login \\
   -H "Content-Type: application/json" \\
   -d '{
-    "username": "admin",
+    "email": "admin@futureguide.id",
     "password": "AdminPassword123"
   }'`
     },
@@ -297,12 +297,12 @@ export const adminServiceData = {
       method: "POST",
       path: "/api/admin/users/:userId/token-balance",
       title: "Update User Token Balance",
-      description: "Update user token balance with add, subtract, or set operations. Proxied to auth-service token balance endpoint.",
+      description: "Update token balance for a specific user. Supports add, subtract, and set operations. Proxied to auth-service.",
       authentication: "Bearer Token (Admin)",
   rateLimit: "Admin Limiter (1000/15min)",
       requestBody: {
         operation: "add",
-        amount: 10
+        amount: 100
       },
       parameters: [
         {
@@ -310,44 +310,28 @@ export const adminServiceData = {
           type: "string",
           required: true,
           description: "UUID of the user"
-        },
-        {
-          name: "operation",
-          type: "string",
-          required: true,
-          description: "Operation type: 'add', 'subtract', or 'set'"
-        },
-        {
-          name: "amount",
-          type: "integer",
-          required: true,
-          description: "Token amount (minimum: 0)"
         }
       ],
       response: {
         success: true,
+        message: "Token balance updated successfully",
         data: {
-          user: {
-            id: "550e8400-e29b-41d4-a716-446655440000",
-            token_balance: 15,
-            updated_at: "2024-01-20T14:22:00.000Z"
-          },
+          userId: "550e8400-e29b-41d4-a716-446655440000",
           operation: "add",
-          amount: 10,
-          previous_balance: 5
-        },
-        message: "Token balance updated successfully"
+          amount: 100,
+          newBalance: 200
+        }
       },
       errorResponses: [
-        { code: "VALIDATION_ERROR", status: 400, message: "\"operation\" must be one of [add, subtract, set]" },
-        { code: "USER_NOT_FOUND", status: 404, message: "User not found" }
+        { code: "VALIDATION_ERROR", status: 400, message: "Invalid operation or amount" },
+        { code: "UNAUTHORIZED", status: 401, message: "Admin access required" }
       ],
-      example: `curl -X POST https://api.futureguide.id/api/admin/users/550e8400-e29b-41d4-a716-446655440000/token-balance \\
-  -H "Authorization: Bearer YOUR_ADMIN_JWT_TOKEN" \\
-  -H "Content-Type: application/json" \\
+      example: `curl -X POST https://api.futureguide.id/api/admin/users/550e8400-e29b-41d4-a716-446655440000/token-balance \
+  -H "Authorization: Bearer YOUR_ADMIN_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
   -d '{
     "operation": "add",
-    "amount": 10
+    "amount": 100
   }'`
     },
     {
@@ -433,6 +417,7 @@ export const adminServiceData = {
       ],
       response: {
         success: true,
+        message: "Success",
         data: {
           user: {
             id: "550e8400-e29b-41d4-a716-446655440000",
@@ -441,9 +426,9 @@ export const adminServiceData = {
               bio: "Updated user biography"
             },
             updated_at: "2024-01-20T14:22:00.000Z"
-          }
-        },
-        message: "User profile updated successfully"
+          },
+          message: "Profile updated successfully"
+        }
       },
       example: `curl -X PUT https://api.futureguide.id/api/admin/users/550e8400-e29b-41d4-a716-446655440000/profile \\
   -H "Authorization: Bearer YOUR_ADMIN_JWT_TOKEN" \\
